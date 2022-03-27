@@ -17,6 +17,7 @@ gem "tzinfo-data"
 gem "bootsnap", require: false
 gem "haml-rails", "~> 2.0"
 gem "ffi"
+gem "rails-controller-testing"
 
 # gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
