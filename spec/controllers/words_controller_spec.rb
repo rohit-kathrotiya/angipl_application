@@ -24,5 +24,14 @@ RSpec.describe WordsController, type: :controller do
         end
 
       
-      end
+    end
+    describe "GET new" do
+        before { get :new }
+        it "assigns @word" do
+            expect(assigns(:word)).to be_a_new(Word)
+        end
+        it "render the new templete" do
+            expect(response).to render_template("new")
+        end
+    end
 end
