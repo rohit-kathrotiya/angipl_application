@@ -2,6 +2,8 @@ class WordsController < ApplicationController
     def index
         @words = Word.all
     end
+
+
     def new
         @word = Word.new
     end
@@ -16,4 +18,6 @@ class WordsController < ApplicationController
     def word_params
         params.require(:word).permit(:value, :language)
     end
+
+
 end

@@ -34,4 +34,27 @@ RSpec.describe WordsController, type: :controller do
             expect(response).to render_template("new")
         end
     end
+
+    describe "POST create" do
+        subject { post :create, params: params }
+        
+        context "valid params" do
+            let(:params) do
+                { word: { value: 'cat', language: 'English'} } 
+            end
+
+            it "create new word" do
+                expect { subject }.to change(Word, :count).from(0).to(1)
+            end
+        end
+        context "invalid params" do
+            let(:params) do
+                { word: { value: 'cat'} } 
+            end
+
+            it "Does not create new word" do
+                expect { subject }.not_to change(Word, :count)
+            end
+        end
+    end
 end
