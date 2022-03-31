@@ -7,6 +7,7 @@ class WordsController < ApplicationController
     def new
         @word = Word.new
     end
+
     def create
         @word = Word.new(word_params)
         if @word.save
@@ -19,5 +20,8 @@ class WordsController < ApplicationController
         params.require(:word).permit(:value, :language)
     end
 
+    def show
+        @word = Word.find(params[:id])
+    end
 
 end
