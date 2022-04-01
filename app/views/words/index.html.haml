@@ -1,3 +1,19 @@
-%h1 Hey Rohit Kathrotiya....Superb, Keep trying.....
-= @words.count
-= @words.inspect
+%h1 Words
+%table.table
+    %thead
+        %tr.table-active
+            %th
+                ID
+            %th
+                VALUE
+            %th
+                LANGUAGE
+        %tbody
+            - @words.each do |word|
+                %tr.table-success
+                    %td
+                        = word.id
+                    %td
+                        = word.value
+                    %td
+                        = word.language

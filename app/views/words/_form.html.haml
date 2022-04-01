@@ -1,4 +1,17 @@
 = simple_form_for @word do |f|
-  = f.input :value
-  = f.input :language
-  = f.button :submit
+  = f.input :value, label: 'Value'
+  = f.input :language, label: 'Language'
+  = f.button :submit, class: 'btn btn-primary'
+
+
+-# %form{role: "form"}
+-#   .form-group
+-#     %label
+-#       Email address
+-#       %input#exampleInputEmail1.form-control{type: "email"}/
+-#     .form-group
+-#     %label
+-#       Password
+-#       %input#exampleInputPassword1.form-control{type: "password"}/
+-#     %button.btn.btn-primary{type: "submit"}
+-#       Submit

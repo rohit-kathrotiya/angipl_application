@@ -3,7 +3,6 @@ class WordsController < ApplicationController
         @words = Word.all
     end
 
-
     def new
         @word = Word.new
     end
@@ -21,7 +20,7 @@ class WordsController < ApplicationController
     end
 
     def show
-        @word = Word.find(params[:id])
+        @word = Word.find(pramas[:id])
     end
 
 end
