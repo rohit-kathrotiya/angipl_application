@@ -16,11 +16,11 @@ class WordsController < ApplicationController
         end
     end
     def word_params
-        params.require(:word).permit(:value, :language)
+        params.require(:word).permit(:content, :language)
     end
 
     def show
-        @word = Word.find(pramas[:id])
+        @word = Word.find(params[:id])
     end
 
 end
