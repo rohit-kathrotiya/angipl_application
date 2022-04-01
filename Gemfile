@@ -7,6 +7,8 @@ gem "rails", "~> 7.0.2", ">= 7.0.2.3"
 gem "sprockets-rails"
 #gem "sqlite3", "~> 1.4"
 gem "pg"
+gem "sassc-rails"
+gem "webpacker"
 gem "puma", "~> 5.0"
 gem "importmap-rails"
 gem "simple_form"
@@ -59,3 +61,4 @@ group :test do
   gem "factory_bot_rails"
   gem 'shoulda-matchers', '~> 5.0'
 end
+
