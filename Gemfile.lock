@@ -120,6 +120,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    language_list (1.2.1)
     loofah (2.15.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -289,6 +290,7 @@ DEPENDENCIES
   haml-rails (~> 2.0)
   importmap-rails
   jbuilder
+  language_list (~> 1.2, >= 1.2.1)
   pg
   pry-rails
   puma (~> 5.0)

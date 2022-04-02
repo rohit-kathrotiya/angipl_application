@@ -1,6 +1,6 @@
 = simple_form_for @word do |f|
   = f.input :content, label: 'content'
-  = f.input :language, label: 'Language'
+  = f.input :language, label: 'Language', collection: LanguageList::COMMON_LANGUAGES.map(&:name)
   = f.button :submit, class: 'btn btn-primary'
 
 
