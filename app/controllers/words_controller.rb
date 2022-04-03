@@ -18,7 +18,7 @@ class WordsController < ApplicationController
     def word_params
         params.require(:word).permit(:content, :language_id)
     end
-
+    
     def show
         @word = Word.find(params[:id])
     end
@@ -34,5 +34,11 @@ class WordsController < ApplicationController
         else
             render :edit
         end
+    end
+
+    def destroy
+        @word = Word.find(params[:id])
+        @word.destroy
+        redirect_to(words_path)
     end
 end

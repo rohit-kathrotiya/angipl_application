@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   root "words#index"
-  resources :words, only: [:index, :new, :create, :show, :edit, :update]       # %i[index new create] both are same method to write
+  resources :words, only: [:index, :new, :create, :show, :edit, :update, :destroy]       # %i[index new create] both are same method to write
 end

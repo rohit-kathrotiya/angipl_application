@@ -10,6 +10,8 @@
                 LANGUAGE
             %th 
                 ACTION
+            %th
+                DELETE
         %tbody
             - @words.each do |word|
                 %tr.table-success
@@ -24,3 +26,8 @@
                     %td
                         = link_to("Show", word_path(word), class: 'btn btn-primary')
                         = link_to("Edit", edit_word_path(word), class: 'btn btn-primary')
+                        -# = link_to("Delete", word_path(word),  
+                        -#     "turbo-method": :delete, 
+                        -#     class: 'btn btn-primary')
+                    %td
+                        = button_to("Delete", word_path(word), method: :delete, class: 'btn btn-primary')
