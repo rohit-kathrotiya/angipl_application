@@ -2,7 +2,7 @@ source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.1"
-#   "
+#   pg_ctl.exe restart -D  "C:\Program Files\PostgreSQL\14\data"
 gem "rails", "~> 7.0.2", ">= 7.0.2.3"
 gem "sprockets-rails"
 #gem "sqlite3", "~> 1.4"
