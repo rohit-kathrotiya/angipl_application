@@ -19,6 +19,8 @@
                         = word.content
                     %td
                         = word.language&.name
+                        -# - if word.language
+                        -#     = word.language.name
                     %td
                         = link_to("Show", word_path(word), class: 'btn btn-primary')
                         = link_to("Edit", edit_word_path(word), class: 'btn btn-primary')
