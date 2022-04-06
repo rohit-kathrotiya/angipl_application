@@ -11,6 +11,7 @@ gem "sassc-rails"
 gem "webpacker"
 gem "puma", "~> 5.0"
 gem 'devise'
+gem 'faker'
 gem "importmap-rails"
 gem 'language_list', '~> 1.2', '>= 1.2.1'
 gem "simple_form"
