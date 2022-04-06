@@ -25,36 +25,112 @@ RSpec.describe WordsController, type: :controller do
 
       
     end
+
     describe "GET new" do
-        before { get :new }
-        it "assigns @word" do
-            expect(assigns(:word)).to be_a_new(Word)
+        
+        context "When user is sign in" do
+            let!(:user) { create(:user) }
+            
+            before do
+                sign_in(user)
+                get :new 
+            end
+
+            it "assigns @word" do
+                expect(assigns(:word)).to be_a_new(Word)
+            end
+            it "render the new templete" do
+                expect(response).to render_template("new")
+            end
+            it do
+                expect(response).to have_http_status(200)
+            end
         end
-        it "render the new templete" do
-            expect(response).to render_template("new")
+
+        context "When user is not sign in" do
+            before do
+                get :new 
+            end
+
+            it "does not assigns @word" do
+                expect(assigns(:word)).to eq(nil)
+            end
+            it "does not render the new templete" do
+                expect(response).not_to render_template("new")
+            end
+            it do
+                expect(response).to have_http_status(302)
+            end
         end
     end
 
     describe "POST create" do
         subject { post :create, params: params }
         
-        context "valid params" do
-            let!(:language) { create(:language) }
-            let(:params) do
-                { word: { content: 'cat', language_id: language.id } } 
-            end
+        context "If user is sign in" do
+            let!(:user) { create(:user) }
+            before { sign_in(user) }
 
-            it "create new word" do
-                expect { subject }.to change(Word, :count).from(0).to(1)
+            context "valid params" do
+                let!(:language) { create(:language) }
+                let(:params) do
+                    { word: { content: 'cat', language_id: language.id } } 
+                end
+
+                it "create new word" do
+                    expect { subject }.to change(Word, :count).from(0).to(1)
+                end
+
+                it do
+                    subject
+                    expect(response).to have_http_status(302)
+                end
+            end
+            context "invalid params" do
+                let(:params) do
+                    { word: { content: ''  } } 
+                end
+
+                it "Does not create new word" do
+                    expect { subject }.not_to change(Word, :count)
+                end
+
+                it do
+                    subject
+                    expect(response).to have_http_status(200)
+                end
             end
         end
-        context "invalid params" do
-            let(:params) do
-                { word: { content: ''  } } 
-            end
 
-            it "Does not create new word" do
-                expect { subject }.not_to change(Word, :count)
+        context "If user is NOT sign in" do
+            context "valid params" do
+                let!(:language) { create(:language) }
+                let(:params) do
+                    { word: { content: 'cat', language_id: language.id } } 
+                end
+
+                it "Does not create new word" do
+                    expect { subject }.not_to change(Word, :count)
+                end
+
+                it do
+                    subject
+                    expect(response).to have_http_status(302)
+                end
+            end
+            context "invalid params" do
+                let(:params) do
+                    { word: { content: ''  } } 
+                end
+
+                it "Does not create new word" do
+                    expect { subject }.not_to change(Word, :count)
+                end
+
+                it do
+                    subject
+                    expect(response).to have_http_status(302)
+                end
             end
         end
     end
