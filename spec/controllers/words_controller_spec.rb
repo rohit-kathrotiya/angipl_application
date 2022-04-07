@@ -153,19 +153,36 @@ RSpec.describe WordsController, type: :controller do
     end
 
     describe "GET edit " do
-        before { get :edit, params: params }
-        
+        subject { get :edit, params: params }
         let(:params) do
             { id: word.id }
         end
-
         let!(:word) { create(:word) } 
 
-        it "assign @word" do
-            expect(assigns(:word)).to eq(word)
+        context "When user is sign in" do
+            let!(:user) { create(:user) }
+            
+            before do
+                sign_in(user)
+                subject
+            end
+
+            it "assign @word" do
+                expect(assigns(:word)).to eq(word)
+            end
+            it "render the edit templete" do
+                expect(response).to render_template(:edit)
+            end
         end
-        it "render the edit templete" do
-            expect(response).to render_template(:edit)
+
+        context "When user is Not sign in" do 
+            it "does not assign @word" do
+                expect(assigns(:word)).to eq(nil)
+            end
+            it do
+                subject
+                expect(response).to have_http_status(302)
+            end
         end
     end
 
@@ -176,49 +193,90 @@ RSpec.describe WordsController, type: :controller do
         let!(:language_1) { create(:language, name: 'English') }
         let!(:language_2) { create(:language, name: 'German') }
 
-        context "valid params" do
-            let(:params) do
-                { id: word.id,  word: { content: 'dog', language_id: language_2.id } } 
+        context "When user is sign in" do
+            let!(:user) { create(:user) }
+            before do
+                sign_in(user)
             end
-            it "update word" do
-                expect { subject }
-                .to change{ word.reload.content }
-                .from('cat')
-                .to('dog')
-                .and change{ word.reload.language }
-                .from(language_1)
-                .to(language_2)
+
+            context "valid params" do
+                let(:params) do
+                    { id: word.id,  word: { content: 'dog', language_id: language_2.id } } 
+                end
+                it "update word" do
+                    expect { subject }
+                    .to change{ word.reload.content }
+                    .from('cat')
+                    .to('dog')
+                    .and change{ word.reload.language }     # .and keyword use to combine different code
+                    .from(language_1)
+                    .to(language_2)
+                end
+                # it "update word" do
+                #     expect { subject }.to change{ word.reload.content }.from('cat').to('dog')
+                # end
+                # it "update language" do
+                #     expect { subject }
+                #     .to change{ word.reload.language }
+                #     .from(language_1).to(language_2)
+                # end
             end
-            # it "update word" do
-            #     expect { subject }.to change{ word.reload.content }.from('cat').to('dog')
-            # end
-            # it "update language" do
-            #     expect { subject }
-            #     .to change{ word.reload.language }
-            #     .from(language_1).to(language_2)
-            # end
+            context "invalid params" do
+                let(:params) do
+                    { id: word.id,  word: { content: '' } } 
+                end
+                it "Does not update word" do
+                    expect { subject }.not_to change{ word.reload.content }
+                end
+            end
         end
-        context "invalid params" do
-            let(:params) do
-                { id: word.id,  word: { content: '' } } 
+
+        context "When user is Not sign in" do
+            context "valid params" do
+                let(:params) do
+                    { id: word.id,  word: { content: 'dog', language_id: language_2.id } } 
+                end
+                it "Does not update word" do
+                    expect { subject }.not_to change{ word.reload.content }
+                end
             end
-            it "Does not update word" do
-                expect { subject }.not_to change{ word.reload.content }
+            context "invalid params" do
+                let(:params) do
+                    { id: word.id,  word: { content: '' } } 
+                end
+                it "Does not update word" do
+                    expect { subject }.not_to change{ word.reload.content }
+                end
             end
         end
     end
 
     describe "DELETE destroy" do
         subject { delete :destroy, params: params }
-
         let!(:word) { create(:word) }
 
-        context "valid params" do
-            let(:params) do
-                { id: word.id } 
+        context "When user is sign in" do
+            let!(:user) { create(:user) }
+            before do
+                sign_in(user)
             end
-            it "delete word" do
-                expect { subject }.to change(Word, :count).from(1).to(0) 
+            context "valid params" do
+                let(:params) do
+                    { id: word.id } 
+                end
+                it "delete word" do
+                    expect { subject }.to change(Word, :count).from(1).to(0) 
+                end
+            end
+        end
+        context "When user is Not sign in" do
+            context "valid params" do
+                let(:params) do
+                    { id: word.id } 
+                end
+                it "Does not delete word" do
+                    expect { subject }.not_to change(Word, :count)
+                end
             end
         end
     end

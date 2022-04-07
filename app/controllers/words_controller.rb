@@ -1,6 +1,6 @@
 class WordsController < ApplicationController
     # before_action call the method which is described. just before perform the actual actions.
-    before_action :authenticate_user!, only: [ :new, :create ]
+    before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :destroy ]
     before_action :set_method, only: %i[show edit update destroy]    
     
     def index
