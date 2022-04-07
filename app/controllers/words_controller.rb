@@ -27,11 +27,12 @@ class WordsController < ApplicationController
     def show; end       # you can delete or write with semicolumn if action is empty
 
     def edit
-        # @word = Word.find(params[:id])
+        authorize @word
     end
 
     def update
-        # @word = Word.find(params[:id])
+        # @word = Word.find(params[:id])     We call this line in set method.
+        authorize @word
         if @word.update(word_params)
             redirect_to(word_path(@word))
         else
@@ -41,6 +42,7 @@ class WordsController < ApplicationController
 
     def destroy
         # @word = Word.find(params[:id])
+        authorize @word
         @word.destroy
         redirect_to(words_path)
     end
