@@ -75,6 +75,7 @@ GEM
     bootstrap4-kaminari-views (1.0.1)
       kaminari (>= 0.13)
       rails (>= 3.1)
+    brakeman (5.2.2)
     builder (3.2.4)
     capybara (3.36.0)
       addressable
@@ -317,6 +318,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   bootstrap4-kaminari-views
+  brakeman
   capybara
   devise
   factory_bot_rails
