@@ -35,3 +35,5 @@
                         -#     class: 'btn btn-primary')
                     %td
                         = button_to("Delete", word_path(word), method: :delete, class: 'btn btn-primary')
+
+= paginate @words, theme: 'twitter-bootstrap-4'
