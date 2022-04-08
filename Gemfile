@@ -12,6 +12,8 @@ gem "webpacker"
 gem "puma", "~> 5.0"
 gem 'devise'
 gem "pundit"
+gem "kaminari"
+gem "bootstrap4-kaminari-views"
 gem "importmap-rails"
 gem 'language_list', '~> 1.2', '>= 1.2.1'
 gem "simple_form"

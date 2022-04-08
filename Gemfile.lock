@@ -72,6 +72,9 @@ GEM
     bindex (0.8.1)
     bootsnap (1.11.1)
       msgpack (~> 1.2)
+    bootstrap4-kaminari-views (1.0.1)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     builder (3.2.4)
     capybara (3.36.0)
       addressable
@@ -129,6 +132,18 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     language_list (1.2.1)
     loofah (2.15.0)
       crass (~> 1.0.2)
@@ -301,6 +316,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
+  bootstrap4-kaminari-views
   capybara
   devise
   factory_bot_rails
@@ -309,6 +325,7 @@ DEPENDENCIES
   haml-rails (~> 2.0)
   importmap-rails
   jbuilder
+  kaminari
   language_list (~> 1.2, >= 1.2.1)
   pg
   pry-rails
